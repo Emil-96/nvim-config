@@ -3,6 +3,7 @@ vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
 vim.opt.signcolumn = "yes"
+vim.opt.clipboard = "unnamedplus"
 
 vim.opt.scrolloff = 8
 
