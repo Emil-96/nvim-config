@@ -1,0 +1,16 @@
+lazy/
+
+lazy-lock.json
+
+node_modules/
+package-lock.json
+
+*.log
+*.swp
+*.swo
+*~
+
+.DS_Store
+Thumbs.db
+
+.local/
