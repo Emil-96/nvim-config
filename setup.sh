@@ -91,11 +91,35 @@ else
     echo -e "${GREEN}✓ goimports found${NC}"
 fi
 
+# Install TypeScript language server
+echo -e "${YELLOW}Checking TypeScript language server...${NC}"
+if ! command -v typescript-language-server &> /dev/null; then
+    echo "Installing typescript-language-server..."
+    if command -v npm &> /dev/null; then
+        npm install -g typescript-language-server typescript
+        echo -e "${GREEN}✓ typescript-language-server installed${NC}"
+    else
+        echo -e "${RED}Error: npm is not installed${NC}"
+        echo "Please install Node.js/npm to use TypeScript support"
+        echo "Or install manually: npm install -g typescript-language-server typescript"
+    fi
+else
+    echo -e "${GREEN}✓ typescript-language-server found${NC}"
+fi
+
 # Make sure Go bin is in PATH
 if [[ ":$PATH:" != *":$HOME/go/bin:"* ]]; then
     echo -e "${YELLOW}Warning: ~/go/bin not in PATH${NC}"
     echo "Add this to your ~/.bashrc or ~/.zshrc:"
     echo "export PATH=\$PATH:\$HOME/go/bin"
+fi
+
+# Check if npm global bin is in PATH (for typescript-language-server)
+NPM_BIN="$(npm config get prefix)/bin"
+if [[ ":$PATH:" != *":$NPM_BIN:"* ]] && command -v npm &> /dev/null; then
+    echo -e "${YELLOW}Warning: npm global bin directory not in PATH${NC}"
+    echo "Add this to your ~/.bashrc or ~/.zshrc:"
+    echo "export PATH=\$PATH:\$(npm config get prefix)/bin"
 fi
 
 echo ""
