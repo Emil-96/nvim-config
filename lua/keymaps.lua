@@ -8,13 +8,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		if formatters and formatters[ft] then
 			-- Use formatter.nvim if configured
 			vim.cmd("FormatWrite")
-		else
-			-- Save cursor position
-			local cursor_pos = vim.fn.getpos('.')
-			-- Use Neovim's built-in reindentation
-			vim.cmd("normal! gg=G")
-			-- Restore cursor position
-			vim.fn.setpos('.', cursor_pos)
 		end
-	end,
+	end
 })
